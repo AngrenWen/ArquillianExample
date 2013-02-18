@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+ <manifest>
+	<uid>greeter</uid>
+	<earPackageName>greeter</earPackageName>
+	<ejbPackageName>greeter-ejb</ejbPackageName>
+	<title>SDK Demo</title>
+	<shortTitle>SDK Demo</shortTitle>
+	<shortDescription>SDK Demo for developers</shortDescription>
+	<longDescription>SDK Demo shows how a developer can write an application.</longDescription>
+	<provider>Beenius</provider>
+	<iconName>sdkdemo-icon.png</iconName>
+	<previewImageName>sdkdemo.jpg</previewImageName>
+</manifest>

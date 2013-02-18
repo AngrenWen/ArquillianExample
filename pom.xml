@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>tv.beenius.greeter</groupId>
+	<artifactId>greeter</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Beesmart application template</name>
+	<description>An application template for Beesmart middleware @Beenius</description>
+
+
+	<organization>
+		<name>Beenius</name>
+		<url>http://http://www.beenius.tv/</url>
+	</organization>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<beeSmartVersion>4.0.3.1-SNAPSHOT</beeSmartVersion>
+		<jbossVersion>[7.1.2-FINAL,]</jbossVersion>
+		<beesmartJboss>192.168.56.101</beesmartJboss>
+		<beesmartJbossUsername>a</beesmartJbossUsername>
+		<beesmartJbossPassword>b</beesmartJbossPassword>
+		<!-- Jboss specs and versions -->
+		<version.org.jboss.spec.javaee6>3.0.0.Final</version.org.jboss.spec.javaee6>
+		<version.org.jboss.logging.jboss-logging>3.1.2.GA</version.org.jboss.logging.jboss-logging>
+		<version.org.hibernate>4.1.6.Final</version.org.hibernate>
+
+	</properties>
+
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.5.1</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+						<fork>true</fork>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<meminitial>128m</meminitial>
+						<maxmem>512m</maxmem>
+						<compilerArgument>-proc:none</compilerArgument>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ejb-plugin</artifactId>
+					<version>2.3</version>
+					<configuration>
+						<ejbVersion>3.1</ejbVersion>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>2.8</version>
+					<configuration>
+						<displayName>Plugin for BeeSmart</displayName>
+						<description>Plugin for BeeSmart</description>
+						<encoding>UTF-8</encoding>
+						<version>6</version>
+						<generateModuleId>true</generateModuleId>
+						<defaultLibBundleDir>lib</defaultLibBundleDir>
+					</configuration>
+				</plugin>
+
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+	
+				<plugin>
+					<groupId>org.jboss.as.plugins</groupId>
+					<artifactId>jboss-as-maven-plugin</artifactId>
+					<version>7.3.Final</version>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.2.2</version>
+				<configuration>
+					<tagBase>${scmTags}</tagBase>
+					<tagNameFormat>1.2.3-SNAPSHOT</tagNameFormat>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>org.jboss.spec</groupId>
+				<artifactId>jboss-javaee-6.0</artifactId>
+				<version>${version.org.jboss.spec.javaee6}</version>
+				<type>pom</type>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.logging</groupId>
+				<artifactId>jboss-logging</artifactId>
+				<version>
+        ${version.org.jboss.logging.jboss-logging}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.json-lib</groupId>
+				<artifactId>json-lib</artifactId>
+				<version>1.1</version>
+				<classifier>jdk15</classifier>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.oracle</groupId>
+				<artifactId>ojdbc6</artifactId>
+				<version>11.2.0.2.0</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>tv.beesmart.msdp</groupId>
+				<artifactId>msdp-core-api</artifactId>
+				<version>${beeSmartVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${version.org.hibernate}</version>
+				<scope>provided</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>com.fasterxml</groupId>
+						<artifactId>classmate</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javassist</groupId>
+						<artifactId>javassist</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.transaction</groupId>
+						<artifactId>jta</artifactId>
+					</exclusion>
+			
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+					</exclusion>
+			
+				</exclusions>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+
+
+	<!-- Jboss apparently changed repositories, if it happens again and you
+		miss the dependecies jboss-annotations-ejb3-4.2.3.GA and jboss-jmx-4.2.3.GA.jar
+		install them to your local repo manualy: mvn install:install-file -DgroupId=jboss
+		-DartifactId=jboss-annotations-ejb3 -Dversion=4.2.3.GA -Dpackaging=jar -Dfile=jboss-annotations-ejb3-4.2.3.GA.jar
+		-DgeneratePom=true mvn install:install-file -DgroupId=jboss -DartifactId=jboss-jmx
+		-Dversion=4.3.0.GA_CP03 -Dpackaging=jar -Dfile=jboss-jmx-4.2.3.GA.jar -DgeneratePom=true -->
+	<repositories>
+		<repository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<layout>default</layout>
+		</repository>
+
+		<repository>
+			<id>BeeSDK</id>
+			<name>Beesmart SDK</name>
+			<url>http://clouddemo.beesmart.tv:8081/nexus/content/groups/public/</url>
+		</repository>
+
+		<repository>
+			<id>java.net-m2</id>
+			<name>java.net - Maven 2</name>
+			<url>http://download.java.net/maven/2/</url>
+			<layout>default</layout>
+		</repository>
+
+		<repository>
+			<id>jboss-maven2-release-repository</id>
+			<name>JBoss</name>
+			<url>
+      https://repository.jboss.org/nexus/content/groups/public/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>
+      https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+  <modules>
+    <module>greeter-ejb</module>
+    <module>greeter-war</module>
+    <module>greeter-ear</module>
+  </modules>
+</project>

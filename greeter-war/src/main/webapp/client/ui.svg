@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<svg
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:svg="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:ev="http://www.w3.org/2001/xml-events"
+ xmlns:bee="http://www.beesmart.biz/2008/beesmart"
+ xmlns:ekioh="http://www.ekioh.com/2007/ekioh"
+>
+	<!-- That's an container group for our application GUI. It's identified by an
+	id attribute. append-to attribute dictates parseAndAppend method where to append
+	DOM objects to. See index.svg and documentation for more details. Display 
+	(attribute) of this group is initially marked as invisible. -->
+    <g xml:id="sdkdemo" bee:append-to="moduleHolder" display="none" 
+    	transform="translate(165, 207)">
+    
+    	<textArea xml:id="sdkdemo-description" x="10" y="30" width="900" 
+    		height="100" style="font-size:25">
+    	Some description that is going to be replaced with amazing text returned
+    	by call to a servlet, we have just created by executing mavens archetype,
+    	who does boring boilerplate J2EE and BS architecture stuff for us. That 
+    	</textArea>
+    	
+		<!-- Feedback container for BS.ui.Feedabck to manifest  -->
+		<g xml:id="sdkdemo-feedback" transform="translate(10, 400)"/> 
+    </g>    
+
+</svg>
+

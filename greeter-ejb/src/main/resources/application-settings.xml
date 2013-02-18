@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<property>
+		<key>TRANSLATION_KEY</key>
+		<value>greeter</value>
+	</property>
+	<property>
+		<key>CLIENT_PATH</key>
+		<value>/greeter/client/client.js</value>
+	</property> 
+</settings>

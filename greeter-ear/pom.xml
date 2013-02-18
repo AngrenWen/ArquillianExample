@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>greeter</artifactId>
+		<groupId>tv.beenius.greeter</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>greeter-ear</artifactId>
+	<packaging>ear</packaging>
+	<name>greeter-ear EAR module</name>
+
+
+	<build>
+		<finalName>greeter</finalName>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+					<applicationName>${appName}</applicationName>
+					<finalName>${finalName}</finalName>
+					<archive>
+						<manifest>
+							<addClasspath>false</addClasspath>
+						</manifest>
+						<manifestEntries>
+							<BeeSdkVersion>${beeSmartVersion}</BeeSdkVersion>
+							<Dependencies>
+								deployment.msdp-all-${beeSmartVersion}.ear</Dependencies>
+						</manifestEntries>
+					</archive>
+					<modules>
+						<webModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>greeter-war</artifactId>
+							<contextRoot>/greeter</contextRoot>
+						</webModule>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>greeter-ejb</artifactId>
+							<bundleFileName>greeter-ejb.jar</bundleFileName>
+						</ejbModule>
+					</modules>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+					<hostname>${beesmartJboss}</hostname>
+					<username>${beesmartJbossUsername}</username>
+					<password>${beesmartJbossPassword}</password>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+
+	<dependencies>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>greeter-ejb</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>greeter-war</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+
+	</dependencies>
+</project>
